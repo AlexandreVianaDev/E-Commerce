@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/database.js" defer></script>
+    <script src="./js/index.js" defer></script>
+    <title>Weartake</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Weartake</h1>
+            <nav id="menu-nav">
+                <ul>
+                    <!-- não usei âncora pois vou usar eventos no JS -->
+                    <li>Todos</li>
+                    <li>Acessórios</li>
+                    <li>Calçados</li>
+                    <li>Camisetas</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="content-all">
+            <main id="content-main">
+                <section id="showcase">
+                    <ul id="card-list">
+                        <!-- cada li representa um card -->
+                        <li class="card">
+                            <img src="./img/camiseta_branca.svg" alt="Camiseta Branca" class="card-img">
+                            <span class="card-category">Camisetas</span>
+                            <span class="card-title">Lightweight Jacket</span>
+                            <span class="card-description">Adicione um pouco de energia ao seu guarda-roupa de inverno
+                                com esta
+                                jaqueta vibrante...</span>
+                            <span class="card-price">R$ 100.00</span>
+                            <span class="addToCart">Adicionar ao carrinho</span>
+                        </li>
+                        <li class="card">
+                            <img src="./img/camiseta_branca.svg" alt="Camiseta Branca" class="card-img">
+                            <span class="card-category">Camisetas</span>
+                            <span class="card-title">Lightweight Jacket</span>
+                            <span class="card-description">Adicione um pouco de energia ao seu guarda-roupa de inverno
+                                com esta
+                                jaqueta vibrante...</span>
+                            <span class="card-price">R$ 100.00</span>
+                            <span class="addToCart">Adicionar ao carrinho</span>
+                        </li>
+                        <li class="card">
+                            <img src="./img/camiseta_branca.svg" alt="Camiseta Branca" class="card-img">
+                            <span class="card-category">Camisetas</span>
+                            <span class="card-title">Lightweight Jacket</span>
+                            <span class="card-description">Adicione um pouco de energia ao seu guarda-roupa de inverno
+                                com esta
+                                jaqueta vibrante...</span>
+                            <span class="card-price">R$ 100.00</span>
+                            <span class="addToCart">Adicionar ao carrinho</span>
+                        </li>
+                        <li class="card">
+                            <img src="./img/camiseta_branca.svg" alt="Camiseta Branca" class="card-img">
+                            <span class="card-category">Camisetas</span>
+                            <span class="card-title">Lightweight Jacket</span>
+                            <span class="card-description">Adicione um pouco de energia ao seu guarda-roupa de inverno
+                                com esta
+                                jaqueta vibrante...</span>
+                            <span class="card-price">R$ 100.00</span>
+                            <span class="addToCart">Adicionar ao carrinho</span>
+                        </li>
+                        <li class="card">
+                            <img src="./img/camiseta_branca.svg" alt="Camiseta Branca" class="card-img">
+                            <span class="card-category">Camisetas</span>
+                            <span class="card-title">Lightweight Jacket</span>
+                            <span class="card-description">Adicione um pouco de energia ao seu guarda-roupa de inverno
+                                com esta
+                                jaqueta vibrante...</span>
+                            <span class="card-price">R$ 100.00</span>
+                            <span class="addToCart">Adicionar ao carrinho</span>
+                        </li>
+                        <li class="card">
+                            <img src="./img/camiseta_branca.svg" alt="Camiseta Branca" class="card-img">
+                            <span class="card-category">Camisetas</span>
+                            <span class="card-title">Lightweight Jacket</span>
+                            <span class="card-description">Adicione um pouco de energia ao seu guarda-roupa de inverno
+                                com esta
+                                jaqueta vibrante...</span>
+                            <span class="card-price">R$ 100.00</span>
+                            <span class="addToCart">Adicionar ao carrinho</span>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+
+            <aside>
+
+                <div id="cart-search">
+                    <input type="text" id="search" placeholder="Digite aqui sua pesquisa" value="">
+                    <button type="button" class="button-search">Pesquisar</button>
+                </div>
+
+                <div id="cart">
+                    <span class="cart-general-title">Carrinho de compras</span>
+                    <ul id="cart-list">
+                        <li class="cart-item">
+                            <div class="cart-list-part1">
+                                <img src="./img/camiseta_branca.svg" alt="Camiseta Branca" class="cart-img">
+                            </div>
+                            <div class="cart-list-part2">
+                                <span class="cart-title">Lightweight Jacket</span>
+                                <span class="cart-price">R$ 100.00</span>
+                                <span class="removeFromCart">Remover produto</span>
+                            </div>
+                        </li>
+                        <li class="cart-item">
+                            <div class="cart-list-part1">
+                                <img src="./img/camiseta_branca.svg" alt="Camiseta Branca" class="cart-img">
+                            </div>
+                            <div class="cart-list-part2">
+                                <span class="cart-title">Lightweight Jacket</span>
+                                <span class="cart-price">R$ 100.00</span>
+                                <span class="removeFromCart">Remover produto</span>
+                            </div>
+                        </li>
+                        <li class="cart-item">
+                            <div class="cart-list-part1">
+                                <img src="./img/camiseta_branca.svg" alt="Camiseta Branca" class="cart-img">
+                            </div>
+                            <div class="cart-list-part2">
+                                <span class="cart-title">Lightweight Jacket</span>
+                                <span class="cart-price">R$ 100.00</span>
+                                <span class="removeFromCart">Remover produto</span>
+                            </div>
+                        </li>
+                        <li class="cart-item">
+                            <div class="cart-list-part1">
+                                <img src="./img/camiseta_branca.svg" alt="Camiseta Branca" class="cart-img">
+                            </div>
+                            <div class="cart-list-part2">
+                                <span class="cart-title">Lightweight Jacket</span>
+                                <span class="cart-price">R$ 100.00</span>
+                                <span class="removeFromCart">Remover produto</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div id="cart-tail">
+                        <div class="cart-tail-part">
+                            <span>Quantidade:</span>
+                            <span>3</span>
+                        </div>
+                        <div class="cart-tail-part">
+                            <span>Total:</span>
+                            <span>R$ 200,00</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <footer></footer>
+
+    </div>
+
+</body>
+
+</html>
