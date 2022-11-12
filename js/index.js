@@ -26,10 +26,43 @@ function clearCart() {
     ulCartList.innerHTML = "";
 }
 
+function checkCart (product) {
+
+    let productID = product.id;
+
+    console.log(`product id: ${productID}`)
+
+    for (let i = 0; i < cartList.length; i++) {
+        let cartItem = cartList[i];
+
+        if (productID == cartItem.id) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function addToCart(product) {
 
-    cartList.push(product);
-    clearCart();
+    let resultCheck = checkCart (product);
+
+    console.log(`result check: ${resultCheck}`);
+
+    if (resultCheck == false) {
+        product.quantity = 1;
+        cartList.push({...product});
+    }
+    else {
+        for (let i = 0; i < cartList.length; i++) {
+            let cartItem = cartList[i];
+
+            if (product.id == cartItem.id) {
+                cartItem.quantity++;
+                renderCart(cartList);
+            }
+        }
+    }
+
     renderCart(cartList);
 }
 
@@ -40,7 +73,6 @@ function removeFromCart(product) {
 
         if (product.id == productOnCart.id) {
             cartList.splice(i, 1);
-            clearCart();
             renderCart(cartList);
             return;
         }
@@ -48,6 +80,9 @@ function removeFromCart(product) {
 }
 
 function renderCart(cartList) {
+
+    clearCart();
+
     let ulCartList = document.querySelector("#cart-list");
 
     for (let i = 0; i < cartList.length; i++) {
@@ -62,13 +97,81 @@ function renderCart(cartList) {
         <div class="cart-list-part2">
             <span class="cart-title">${product.nameItem}</span>
             <span class="cart-price">R$ ${product.value.toFixed(2)}</span>
+            <div class="cart-amount">
+                <button class="cart-remove1" id="cartSubId-${product.id}"type="button">-</button>
+                <button class="cart-quantity" type="button">1</button>
+                <button class="cart-add1" id="cartAddId-${product.id}" type="button">+</button>
+            </div>
             <span class="removeFromCart" id="cartId-${product.id}">Remover produto</span>
         </div>
         </li>`
         )
     }
     removeFromCartButton();
+    subQuantityCartButton ();
+    addQuantityCartButton ();
+    updateItemQuantity ();
     updateCartTail ();
+}
+
+function updateItemQuantity () {
+
+    let cartQuantities = document.querySelectorAll(".cart-quantity")
+
+    for (let i = 0; i < cartQuantities.length; i++) {
+
+        let cartQuantity = cartQuantities[i];
+
+        cartQuantity.innerHTML = `${cartList[i].quantity}`;
+    }
+}
+
+function subQuantityCartButton () {
+    let subQuantityCartButtons = document.querySelectorAll(".cart-remove1");
+
+    for (let i = 0; i < subQuantityCartButtons.length; i++) {
+        let subQtCartButton = subQuantityCartButtons[i];
+
+        subQtCartButton.addEventListener("click", function (e){
+            let target = e.target;
+            let cartId = target.id.substring(10);
+            console.log(cartId)
+            removeOneUnit(data[cartId - 1]);
+        })
+    }
+}
+
+function removeOneUnit (product){
+
+    for (let i = 0; i < cartList.length; i++) {
+        let cartItem = cartList[i];
+
+        if (product.id == cartItem.id) {
+            cartItem.quantity--;
+
+            if (cartItem.quantity <= 0) {
+                removeFromCart(product);
+            }
+            renderCart(cartList);
+        }
+    }
+}
+
+
+function addQuantityCartButton () {
+
+    let addQuantityCartButtons = document.querySelectorAll(".cart-add1");
+
+    for (let i = 0; i < addQuantityCartButtons.length; i++) {
+        let addQtCartButton = addQuantityCartButtons[i];
+
+        addQtCartButton.addEventListener("click", function (e){
+            let target = e.target;
+            let cartId = target.id.substring(10);
+            console.log(cartId)
+            addToCart(data[cartId - 1]);
+        })
+    }
 }
 
 function addToCartButton() {
@@ -103,7 +206,15 @@ function removeFromCartButton() {
 
 function updateCartQuantity () {
     let cartQuantity = document.querySelector("#cart-quantity");
-    cartQuantity.innerHTML = `${cartList.length}`
+
+    let total = 0;
+
+    for (let i = 0; i < cartList.length; i++) {
+        let cartItem = cartList[i];
+        total+= cartItem.quantity;
+    }
+
+    cartQuantity.innerHTML = `${total}`
 }
 
 function updateCartValue () {
@@ -115,7 +226,7 @@ function updateCartValue () {
 
         let cartItem = cartList[i];
 
-        cartTotalValue += cartItem.value;
+        cartTotalValue += cartItem.value * cartItem.quantity;
     }
 
     cartValue.innerHTML = `R$ ${cartTotalValue.toFixed(2)}`

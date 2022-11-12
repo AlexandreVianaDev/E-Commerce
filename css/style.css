@@ -208,6 +208,13 @@ aside {
     gap: 10px;
 }
 
+.cart-remove1, .cart-add1 {
+    padding: 0 15px;
+    border-radius: 2px;
+    background-color: #828282;
+    color: #F5F5F5;
+}
+
 .cart-empty-title {
     font-size: 20px;
     font-weight: bold;
