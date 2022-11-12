@@ -8,6 +8,15 @@ function renderCards(list) {
 
     let cardList = document.querySelector("#card-list");
 
+    if (list.length == 0) { // condição de lista vazia para aviso 
+        cardList.insertAdjacentHTML("beforeend",
+            `<li class="card-empty">
+                <span class="card-empty-title">OPS... NENHUM PRODUTO ENCONTRADO</span>
+                <span class="card-empty-description">Infelizmente sua busca não teve resultados, tente outros termos.</span>
+            </li>`
+        )
+    }
+
     for (let i = 0; i < list.length; i++) {
         let product = list[i];
 
@@ -301,10 +310,67 @@ function searchButton () {
     })
 }
 
+function tagButtons () {
+    let tagAllButton = document.querySelector("#tagAll");
+    let tagAcessoryButton = document.querySelector("#tagAcessory");
+    let tagShoesButton = document.querySelector("#tagShoes");
+    let tagShirtButton = document.querySelector("#tagShirts");
+
+    tagAllButton.addEventListener("click", function (e) {
+        tagAllButton.classList.add("bold");
+        tagAcessoryButton.classList.remove("bold");
+        tagShoesButton.classList.remove("bold");
+        tagShirtButton.classList.remove("bold");
+        renderCards(data);
+    })
+
+    tagAcessoryButton.addEventListener("click", function (e) {
+        tagAllButton.classList.remove("bold");
+        tagAcessoryButton.classList.add("bold");
+        tagShoesButton.classList.remove("bold");
+        tagShirtButton.classList.remove("bold");
+        renderCards(tagFilterList ("Acessórios"));
+    })
+    
+    tagShoesButton.addEventListener("click", function (e) {
+        tagAllButton.classList.remove("bold");
+        tagAcessoryButton.classList.remove("bold");
+        tagShoesButton.classList.add("bold");
+        tagShirtButton.classList.remove("bold");
+        renderCards(tagFilterList ("Calçados"));
+    })
+    
+    tagShirtButton.addEventListener("click", function (e) {
+        tagAllButton.classList.remove("bold");
+        tagAcessoryButton.classList.remove("bold");
+        tagShoesButton.classList.remove("bold");
+        tagShirtButton.classList.add("bold");
+        renderCards(tagFilterList ("Camisetas"));
+    })
+}
+
+function tagFilterList (tag) {
+
+    const tagList = [];
+
+    for (let i = 0; i < data.length; i++) {
+        let item = data[i];
+
+        for (let j = 0; j < item.tag.length; j++) {
+            let itemTag = item.tag[j];
+            if (itemTag == tag) {
+                tagList.push (item);
+            }
+        }
+    }
+    return tagList;
+}
+
 
 function start() {
     renderCards(data);
     renderCart(cartList); // eu chamo o carrinho aqui, porque se fosse um site completinho eu teria que renderizar o que o cliente deixou no carrinho;
+    tagButtons ();
     searchButton ();
 }
 
