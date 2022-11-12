@@ -10,7 +10,6 @@ body, * {
 }
 
 body {
-    background-color: #f5f5f5;
     font-size: 14px;
 }
 
@@ -80,7 +79,7 @@ h1 {
     gap: 20px;
     display: flex;
     flex-direction: column;
-    border: 2px solid transparent;
+    border: 2px solid #F5F5F5;
     padding: 10px;
 }
 
@@ -88,11 +87,18 @@ h1 {
     border: 2px #37268c solid;
 }
 
+.card-figure {
+    background-color: #F5F5F5;
+    width: 100%;
+    display: flex;
+}
+
 
 .card-img {
     max-width: 100%;
     height: 125px;
     object-fit: cover;
+    margin: 0 auto;
 }
 
 .card-category {
@@ -150,6 +156,7 @@ aside {
     padding: 10px;
     border: 0;
     box-shadow:#37268C 6px 6px 6px -8px;
+    background-color: #F5F5F5;
     border: 3px #2E245E solid transparent;
 }
 
@@ -158,14 +165,14 @@ aside {
     border: 3px #2E245E solid;
 }
 
-.button-search {
+#button-search {
     background-color: #37268C;
     color: #F5F5F5;
     width: 25%;
     border: 0;
 }
 
-.button-search:hover {
+#button-search:hover {
     cursor: pointer;
     background-color: #2E245E;
 }
@@ -193,6 +200,7 @@ aside {
 
 .cart-list-part1 {
     width: 30%;
+    margin-right: 20px;
 }
 
 .cart-img {
@@ -251,5 +259,6 @@ aside {
 }
 
 .hide-scrollbar {
+    /* sei que !important não é uma boa prática, afinal ela vai contra a herança, porém não posso adicionar 2 ids ao mesmo elemento, talvez alterar o id fosse a melhor solução apesar de ser ruim ficar se repetindo no código... */
     overflow: hidden !important;
 }

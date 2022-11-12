@@ -1,24 +1,35 @@
 let cartList = [];
 
-function renderCards(data) {
+let searchList = [];
+
+function renderCards(list) {
+
+    clearCards ();
 
     let cardList = document.querySelector("#card-list");
 
-    for (let i = 0; i < data.length; i++) {
-        let product = data[i];
+    for (let i = 0; i < list.length; i++) {
+        let product = list[i];
 
         cardList.insertAdjacentHTML("beforeend",
             `<li class="card">
-            <img src="${product.img}" alt="${product.nameItem}" class="card-img">
-            <span class="card-category">${product.tag}</span>
-            <span class="card-title">${product.nameItem}</span>
-            <span class="card-description">${product.description}</span>
-            <span class="card-price">R$ ${product.value.toFixed(2)}</span>
-            <span class="addToCart" id="${product.id}">${product.addCart}</span>
+                <figure class="card-figure">
+                    <img src="${product.img}" alt="${product.nameItem}" class="card-img">
+                </figure>
+                <span class="card-category">${product.tag}</span>
+                <span class="card-title">${product.nameItem}</span>
+                <span class="card-description">${product.description}</span>
+                <span class="card-price">R$ ${product.value.toFixed(2)}</span>
+                <span class="addToCart" id="${product.id}">${product.addCart}</span>
             </li>`
         )
     }
     addToCartButton();
+}
+
+function clearCards () {
+    let cardList = document.querySelector("#card-list");
+    cardList.innerHTML = "";
 }
 
 function clearCart() {
@@ -29,8 +40,6 @@ function clearCart() {
 function checkCart (product) {
 
     let productID = product.id;
-
-    console.log(`product id: ${productID}`)
 
     for (let i = 0; i < cartList.length; i++) {
         let cartItem = cartList[i];
@@ -45,8 +54,6 @@ function checkCart (product) {
 function addToCart(product) {
 
     let resultCheck = checkCart (product);
-
-    console.log(`result check: ${resultCheck}`);
 
     if (resultCheck == false) {
         product.quantity = 1;
@@ -135,7 +142,6 @@ function subQuantityCartButton () {
         subQtCartButton.addEventListener("click", function (e){
             let target = e.target;
             let cartId = target.id.substring(10);
-            console.log(cartId)
             removeOneUnit(data[cartId - 1]);
         })
     }
@@ -168,7 +174,6 @@ function addQuantityCartButton () {
         addQtCartButton.addEventListener("click", function (e){
             let target = e.target;
             let cartId = target.id.substring(10);
-            console.log(cartId)
             addToCart(data[cartId - 1]);
         })
     }
@@ -256,9 +261,51 @@ function updateCartTail () {
     } 
 }
 
+function search(parameter) {
+    
+    let filter = parameter.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+    searchList = [];
+
+    for (let i = 0; i < data.length; i++) {
+        let product = data[i];
+        let productName = product.nameItem.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+        let productDescription = product.description.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+        if (productName.indexOf(filter) > -1 || productDescription.indexOf(filter) > -1) {
+            searchList.push(product);
+        }
+        else { // só pesquisa por tag se ele não se encaixar na pesquisa pelo nome e descrição
+            for (let j = 0; j < product.tag.length; j++) {
+
+                let tag = product.tag[j].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+                if (tag.indexOf(filter) > -1) {
+                    searchList.push(product);
+                }
+
+            }
+        }
+    }
+
+    renderCards(searchList);
+}
+
+
+function searchButton () {
+    let searchButton = document.querySelector("#button-search");
+    let searchBar = document.querySelector("#search");
+
+    searchButton.addEventListener("click", function (e){
+        search(searchBar.value);
+    })
+}
+
+
 function start() {
     renderCards(data);
     renderCart(cartList); // eu chamo o carrinho aqui, porque se fosse um site completinho eu teria que renderizar o que o cliente deixou no carrinho;
+    searchButton ();
 }
 
 start();
