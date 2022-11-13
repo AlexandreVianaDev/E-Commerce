@@ -1,7 +1,12 @@
+// LISTA (ARRAY) DO CARRINHO
 let cartList = [];
 
+// LISTA DE ITENS ENCONTRADOS NA PESQUISA
 let searchList = [];
 
+// ATÉ PENSEI EM FAZER UMA LISTA PARA O PADRÃO (TODOS), PORÉM ACREDITO QUE SERIA REDUNDANTE, AFINAL EU VOU PUXAR TUDO DE UM ARQUIVO.JS DENTRO DO PROJETO
+
+// RENDERIZAR OS PRODUTOS DE UMA LISTA
 function renderCards(list) {
 
     clearCards ();
@@ -36,65 +41,13 @@ function renderCards(list) {
     addToCartButton();
 }
 
+// LIMPAR OS PRODUTOS NO HTML
 function clearCards () {
     let cardList = document.querySelector("#card-list");
     cardList.innerHTML = "";
 }
 
-function clearCart() {
-    let ulCartList = document.querySelector("#cart-list");
-    ulCartList.innerHTML = "";
-}
-
-function checkCart (product) {
-
-    let productID = product.id;
-
-    for (let i = 0; i < cartList.length; i++) {
-        let cartItem = cartList[i];
-
-        if (productID == cartItem.id) {
-            return true;
-        }
-    }
-    return false;
-}
-
-function addToCart(product) {
-
-    let resultCheck = checkCart (product);
-
-    if (resultCheck == false) {
-        product.quantity = 1;
-        cartList.push({...product});
-    }
-    else {
-        for (let i = 0; i < cartList.length; i++) {
-            let cartItem = cartList[i];
-
-            if (product.id == cartItem.id) {
-                cartItem.quantity++;
-                renderCart(cartList);
-            }
-        }
-    }
-
-    renderCart(cartList);
-}
-
-function removeFromCart(product) {
-    for (let i = 0; i < cartList.length; i++) {
-
-        let productOnCart = cartList[i];
-
-        if (product.id == productOnCart.id) {
-            cartList.splice(i, 1);
-            renderCart(cartList);
-            return;
-        }
-    }
-}
-
+// RENDERIZAR CARRINHO
 function renderCart(cartList) {
 
     clearCart();
@@ -130,64 +83,7 @@ function renderCart(cartList) {
     updateCartTail ();
 }
 
-function updateItemQuantity () {
-
-    let cartQuantities = document.querySelectorAll(".cart-quantity")
-
-    for (let i = 0; i < cartQuantities.length; i++) {
-
-        let cartQuantity = cartQuantities[i];
-
-        cartQuantity.innerHTML = `${cartList[i].quantity}`;
-    }
-}
-
-function subQuantityCartButton () {
-    let subQuantityCartButtons = document.querySelectorAll(".cart-remove1");
-
-    for (let i = 0; i < subQuantityCartButtons.length; i++) {
-        let subQtCartButton = subQuantityCartButtons[i];
-
-        subQtCartButton.addEventListener("click", function (e){
-            let target = e.target;
-            let cartId = target.id.substring(10);
-            removeOneUnit(data[cartId - 1]);
-        })
-    }
-}
-
-function removeOneUnit (product){
-
-    for (let i = 0; i < cartList.length; i++) {
-        let cartItem = cartList[i];
-
-        if (product.id == cartItem.id) {
-            cartItem.quantity--;
-
-            if (cartItem.quantity <= 0) {
-                removeFromCart(product);
-            }
-            renderCart(cartList);
-        }
-    }
-}
-
-
-function addQuantityCartButton () {
-
-    let addQuantityCartButtons = document.querySelectorAll(".cart-add1");
-
-    for (let i = 0; i < addQuantityCartButtons.length; i++) {
-        let addQtCartButton = addQuantityCartButtons[i];
-
-        addQtCartButton.addEventListener("click", function (e){
-            let target = e.target;
-            let cartId = target.id.substring(10);
-            addToCart(data[cartId - 1]);
-        })
-    }
-}
-
+// BOTÃO DE ADICIONAR O PRODUTO AO CARRINHO (CART)
 function addToCartButton() {
 
     let addToCartButtons = document.querySelectorAll(".addToCart");
@@ -202,6 +98,50 @@ function addToCartButton() {
     }
 }
 
+// ADICIONAR O PRODUTO AO CARRINHO
+function addToCart(product) {
+
+    let resultCheck = checkCart (product);
+
+    if (resultCheck == false) {
+        product.quantity = 1;
+        cartList.push({...product});
+    }
+    else {
+        for (let i = 0; i < cartList.length; i++) {
+            let cartItem = cartList[i];
+
+            if (product.id == cartItem.id) {
+                cartItem.quantity++;
+                renderCart(cartList);
+            }
+        }
+    }
+    renderCart(cartList);
+}
+
+// LIMPAR CARRINHO
+function clearCart() {
+    let ulCartList = document.querySelector("#cart-list");
+    ulCartList.innerHTML = "";
+}
+
+// CHECAR SE O PRODUTO JÁ EXISTE NO CARRINHO
+function checkCart (product) {
+
+    let productID = product.id;
+
+    for (let i = 0; i < cartList.length; i++) {
+        let cartItem = cartList[i];
+
+        if (productID == cartItem.id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// BOTÃO DE REMOVER ITEM COMPLETAMENTE DO CARRINHO
 function removeFromCartButton() {
 
     let removeFromCartButtons = document.querySelectorAll(".removeFromCart");
@@ -218,6 +158,82 @@ function removeFromCartButton() {
     }
 }
 
+// REMOVER COMPLETAMENTE PRODUTO DO CARRINHO
+function removeFromCart(product) {
+    for (let i = 0; i < cartList.length; i++) {
+
+        let productOnCart = cartList[i];
+
+        if (product.id == productOnCart.id) {
+            cartList.splice(i, 1);
+            renderCart(cartList);
+            return;
+        }
+    }
+}
+
+// ATUALIZAR QUANTIDADE DE CADA ITEM NO CARRINHO
+function updateItemQuantity () {
+
+    let cartQuantities = document.querySelectorAll(".cart-quantity")
+
+    for (let i = 0; i < cartQuantities.length; i++) {
+
+        let cartQuantity = cartQuantities[i];
+
+        cartQuantity.innerHTML = `${cartList[i].quantity}`;
+    }
+}
+
+// BOTÃO DE DIMINUIR 1 DA QUANTIDADE DO ITEM NO CARRINHO
+function subQuantityCartButton () {
+    let subQuantityCartButtons = document.querySelectorAll(".cart-remove1");
+
+    for (let i = 0; i < subQuantityCartButtons.length; i++) {
+        let subQtCartButton = subQuantityCartButtons[i];
+
+        subQtCartButton.addEventListener("click", function (e){
+            let target = e.target;
+            let cartId = target.id.substring(10);
+            removeOneUnit(data[cartId - 1]);
+        })
+    }
+}
+
+// DIMINUIR EM 1 A QUANTIDADE DO ITEM NO CARRINHO
+function removeOneUnit (product){
+
+    for (let i = 0; i < cartList.length; i++) {
+        let cartItem = cartList[i];
+
+        if (product.id == cartItem.id) {
+            cartItem.quantity--;
+
+            if (cartItem.quantity <= 0) {
+                removeFromCart(product);
+            }
+            renderCart(cartList);
+        }
+    }
+}
+
+// BOTÃO DE ADICIONAR 1 NA QUANTIDADE DO ITEM NO CARRINHO
+function addQuantityCartButton () {
+
+    let addQuantityCartButtons = document.querySelectorAll(".cart-add1");
+
+    for (let i = 0; i < addQuantityCartButtons.length; i++) {
+        let addQtCartButton = addQuantityCartButtons[i];
+
+        addQtCartButton.addEventListener("click", function (e){
+            let target = e.target;
+            let cartId = target.id.substring(10);
+            addToCart(data[cartId - 1]);
+        })
+    }
+}
+
+// ATUALIZAR QUANTIDADE TOTAL DE TODOS OS ITENS NO CARRINHO
 function updateCartQuantity () {
     let cartQuantity = document.querySelector("#cart-quantity");
 
@@ -231,7 +247,8 @@ function updateCartQuantity () {
     cartQuantity.innerHTML = `${total}`
 }
 
-function updateCartValue () {
+// ATUALIZAR O CUSTO DE TODOS OS ITENS NO CARRINHO
+function updateCartValue (coupon) {
     let cartValue = document.querySelector("#cart-value");
 
     let cartTotalValue = 0;
@@ -243,12 +260,17 @@ function updateCartValue () {
         cartTotalValue += cartItem.value * cartItem.quantity;
     }
 
+    if (coupon == "cupom25") {
+        cartTotalValue -= cartTotalValue/100*25;
+    }
+
     cartValue.innerHTML = `R$ ${cartTotalValue.toFixed(2)}`
 }
 
+// CHAMA FUNÇÕES DE ATUALIZAÇÃO DO FINAL DO CARRINHO E ALTERA ESTILO DO "FINAL" DO CARRINHO SE NECESSÁRIO
 function updateCartTail () {
     updateCartQuantity ();
-    updateCartValue ();
+    updateCartValue (coupon.value);
 
     let cartTail = document.querySelector("#cart-tail");
     let ulCartList = document.querySelector("#cart-list");
@@ -270,6 +292,17 @@ function updateCartTail () {
     } 
 }
 
+// BOTÃO DE PESQUISA
+function searchButton () {
+    let searchButton = document.querySelector("#button-search");
+    let searchBar = document.querySelector("#search");
+
+    searchButton.addEventListener("click", function (e){
+        search(searchBar.value);
+    })
+}
+
+// PESQUISA
 function search(parameter) {
     
     let filter = parameter.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
@@ -300,16 +333,7 @@ function search(parameter) {
     renderCards(searchList);
 }
 
-
-function searchButton () {
-    let searchButton = document.querySelector("#button-search");
-    let searchBar = document.querySelector("#search");
-
-    searchButton.addEventListener("click", function (e){
-        search(searchBar.value);
-    })
-}
-
+// BOTÕES DE TAG
 function tagButtons () {
     let tagAllButton = document.querySelector("#tagAll");
     let tagAcessoryButton = document.querySelector("#tagAcessory");
@@ -349,6 +373,7 @@ function tagButtons () {
     })
 }
 
+// FILTRO DE TAGS
 function tagFilterList (tag) {
 
     const tagList = [];
@@ -366,12 +391,52 @@ function tagFilterList (tag) {
     return tagList;
 }
 
+// APLICAR CUPOM
+function couponApply () {
+    let couponButton = document.querySelector("#button-coupon");
+    let coupon = document.querySelector("#coupon")
 
+    couponButton.addEventListener("click", function(e){
+        updateCartValue (coupon.value);
+    })
+}
+
+// FINALIZAR COMPRA
+function checkOut () {
+    let checkOutButton = document.querySelector("#button-checkout");
+
+    let alertBox = document.querySelector("#alert-box");
+
+    checkOutButton.addEventListener("click", function(e){
+        alertBox.insertAdjacentHTML("beforeend", `
+        <div class="container">
+            <span class="alert-msg">Compra realizada com sucesso!</span>
+            <span class="alert-close-button">X</span>
+        </div>
+        `)
+        closeAlertButton ();
+    })
+}
+
+// BOTÃO DE FECHAR ALERTA 
+function closeAlertButton () {
+    let alertBox = document.querySelector("#alert-box");
+    let closeButton = document.querySelector(".alert-close-button");
+
+    closeButton.addEventListener("click", function (e){
+        alertBox.innerHTML = "";
+    })
+}
+
+// FUNÇÃO PARA INICIAR TODO O FUNCIONAMENTO
 function start() {
     renderCards(data);
     renderCart(cartList); // eu chamo o carrinho aqui, porque se fosse um site completinho eu teria que renderizar o que o cliente deixou no carrinho;
     tagButtons ();
     searchButton ();
+    couponApply ();
+    checkOut ();
 }
 
+// CHAMANDO A FUNÇÃO START
 start();
