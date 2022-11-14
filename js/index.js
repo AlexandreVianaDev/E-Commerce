@@ -292,6 +292,18 @@ function updateCartTail () {
     } 
 }
 
+// FUNÇÃO PARA FAZER O FORM DO SEARCH IR COM ENTER (E NÃO RECARREGAR A PÁGINA)
+function searchInput () {
+    let form = document.querySelector("#form-search");
+    let searchBar = document.querySelector("#search");
+
+    form.addEventListener("submit", function(e){
+        e.preventDefault();
+        search(searchBar.value);
+        // return false;
+    })
+}
+
 // BOTÃO DE PESQUISA
 function searchButton () {
     let searchButton = document.querySelector("#button-search");
@@ -399,6 +411,12 @@ function couponApply () {
     couponButton.addEventListener("click", function(e){
         updateCartValue (coupon.value);
     })
+
+    coupon.addEventListener("keypress", function(e){
+        if (e.key === "Enter") {
+            updateCartValue (coupon.value);
+        }
+    })
 }
 
 // FINALIZAR COMPRA
@@ -431,18 +449,6 @@ function closeAlertButton () {
     })
 }
 
-// FUNÇÃO PARA IMPEDIR RECARREGAMENTO DA PÁGINA NOS FORMS
-
-function stopReloadingForms () {
-    let forms = document.querySelectorAll("form");
-
-    for (let i = 0; i < forms.length; i++) {
-        let form = forms[i];
-
-        form.preventDefault();
-    }
-}
-
 // FUNÇÃO PARA INICIAR TODO O FUNCIONAMENTO
 function start() {
     renderCards(data);
@@ -451,7 +457,7 @@ function start() {
     searchButton ();
     couponApply ();
     checkOut ();
-    stopReloadingForms ();
+    searchInput ();
 }
 
 // CHAMANDO A FUNÇÃO START

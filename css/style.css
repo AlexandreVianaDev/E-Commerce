@@ -374,8 +374,26 @@ aside {
 #button-checkout:hover {
     cursor: pointer;
     background-color: #37268C;
-    color: #F5F5F5;;
+    color: #F5F5F5;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #F5F5F5;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #828282;
+    border-radius: 10px;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #333333;
+}
+
 
 .hide {
     display: none;
