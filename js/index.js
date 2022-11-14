@@ -408,6 +408,9 @@ function checkOut () {
     let alertBox = document.querySelector("#alert-box");
 
     checkOutButton.addEventListener("click", function(e){
+
+        alertBox.innerHTML = "";
+
         alertBox.insertAdjacentHTML("beforeend", `
         <div class="container">
             <span class="alert-msg">Compra realizada com sucesso!</span>
@@ -428,6 +431,18 @@ function closeAlertButton () {
     })
 }
 
+// FUNÇÃO PARA IMPEDIR RECARREGAMENTO DA PÁGINA NOS FORMS
+
+function stopReloadingForms () {
+    let forms = document.querySelectorAll("form");
+
+    for (let i = 0; i < forms.length; i++) {
+        let form = forms[i];
+
+        form.preventDefault();
+    }
+}
+
 // FUNÇÃO PARA INICIAR TODO O FUNCIONAMENTO
 function start() {
     renderCards(data);
@@ -436,6 +451,7 @@ function start() {
     searchButton ();
     couponApply ();
     checkOut ();
+    stopReloadingForms ();
 }
 
 // CHAMANDO A FUNÇÃO START

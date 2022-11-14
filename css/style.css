@@ -198,7 +198,7 @@ aside {
     gap: 10px;
 }
 
-#cart-search {
+#cart-search form {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -322,6 +322,13 @@ aside {
     justify-content: space-between;
 }
 
+.cart-tail-part form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+} 
+
 .cart-tail-part span {
     color: #F5F5F5;
 }
@@ -369,8 +376,6 @@ aside {
     background-color: #37268C;
     color: #F5F5F5;;
 }
-
-
 
 .hide {
     display: none;
