@@ -15,3 +15,7 @@ Este projeto foi desenvolvido no final do primeiro módulo da Kenzie Academy (2 
 - ``JavaScript``
 - ``CSS``
 - ``HTML``
+
+# 🛠️ Abrir e rodar o projeto
+
+**Github Pages: https://alexandrevianadev.github.io/e-commerce/**
