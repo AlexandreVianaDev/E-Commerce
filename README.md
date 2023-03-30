@@ -1,17 +1,19 @@
 # Weartake e-commerce
 M1 🏆 Projeto Front End: E-commerce
 
+# Resumo do projeto
+Weartake é um e-commerce que conta com uma lista de produtos renderizados dinamicamente e um carrinho de compras.
 Este projeto foi desenvolvido no final do primeiro módulo da Kenzie Academy (2 meses).
 
-# Sobre
-Weartake é um e-commerce que conta com uma lista de produtos renderizados dinamicamente e um carrinho de compras.
+# :hammer: Funcionalidades do projeto
 
-# Features
-Você pode pesquisar pelo nome, descrição ou categoria usando a barra de pesquisa, ou pode acessar todos os produtos de uma categoria usando o menu.
-Na lista de produtos você pode ver várias informações como categoria, nome, descrição e preço, além da opção de adicionar o produto ao carrinho.
-No carrinho você pode aumentar ou diminuir a quantidade de um produto, ou até mesmo removê-lo completamente, o carrinho também conta com sistema de de cupom (teste usando cupom25), calcula a quantidade de produtos e também o valor total.
+- `Produtos`: possuem categoria, nome, descrição, preço e a opção de adicionar produto ao carrinho
+- `Carrinho`: o carrinho recebe produtos, além disso ele calcula a quantidade total de produtos e o valor total
+- `Cupom`: é possível adicionar um cupom25 para ter 25% de desconto
+- `Funcionalidade 3`: descrição da funcionalidade 3
 
-# Tecnologias utilizadas
-- JavaScript
-- CSS
-- HTML
+## ✔️ Técnicas e tecnologias utilizadas
+
+- ``JavaScript``
+- ``CSS``
+- ``HTML``
